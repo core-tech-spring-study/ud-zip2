@@ -2,9 +2,10 @@ package hello.core.singleton;
 
 import hello.core.AppConfig;
 import hello.core.member.MemberService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SingletonTest {
 
@@ -24,6 +25,19 @@ public class SingletonTest {
         System.out.println(memberService2);
 
         // memberService1 != memberService2
-        Assertions.assertThat(memberService1).isNotSameAs(memberService2);
+        assertThat(memberService1).isNotSameAs(memberService2);
+    }
+
+    @Test
+    @DisplayName("싱글톤 패턴을적용한 객체 사용")
+    void singletonServiceTest() {
+        SingletonServiceTest singletonServiceTest1 = SingletonServiceTest.getInstance();
+        SingletonServiceTest singletonServiceTest2 = SingletonServiceTest.getInstance();
+
+        System.out.println("singletonService1 : "+ singletonServiceTest1);
+        System.out.println("singletonService2 : "+ singletonServiceTest2);
+
+        // 객체가 진짜로 같은 객체인지 구별하기 위해서는 isSameAs, isNotSameAs
+        assertThat(singletonServiceTest1).isSameAs(singletonServiceTest2);
     }
 }
